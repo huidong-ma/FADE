@@ -1,5 +1,3 @@
-# 算数编码, 见DZip
-# Reference arithmetic coding
 # Copyright (c) Project Nayuki
 # 
 # https://www.nayuki.io/page/reference-arithmetic-coding
