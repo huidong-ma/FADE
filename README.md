@@ -2,12 +2,18 @@
 <h1>Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
 </div>
 
-# Running
+# Usage
+## Setup
 ```
-Compression:
+cd ./FADE
+pip install requirements.txt
+```
+## Running
+```
+# Compression
 python sspp.py c <file> <file>.cmp
 
-Decompression:
+# Decompression
 python sspp.py d <file>.cmp <file>.decmp
 ```
 **For example**:
