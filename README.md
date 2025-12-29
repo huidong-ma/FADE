@@ -11,15 +11,15 @@ pip install requirements.txt
 ## Running
 ```
 # Compression
-python sspp.py c <file> <file>.cmp
+python cspp.py c <file> <file>.cmp
 
 # Decompression
-python sspp.py d <file>.cmp <file>.decmp
+python cspp.py d <file>.cmp <file>.decmp
 ```
 **For example**:
 ```
-python sspp.py c enwik6 enwik6.cmp
-python sspp.py d enwik6.cmp enwik6.decmp
+python cspp.py c enwik6 enwik6.cmp
+python cspp.py d enwik6.cmp enwik6.decmp
 ```
 
 # Dataset
