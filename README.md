@@ -11,16 +11,19 @@ pip install requirements.txt
 ## Running
 ```
 # Compression
-python cspp.py c <file> <file>.cmp
+python fade.py c <file> <file>.cmp
 
 # Decompression
-python cspp.py d <file>.cmp <file>.decmp
+python fade.py d <file>.cmp <file>.decmp
 ```
 **For example**:
 ```
-python cspp.py c enwik6 enwik6.cmp
-python cspp.py d enwik6.cmp enwik6.decmp
+python fade.py c enwik6 enwik6.cmp
+python fade.py d enwik6.cmp enwik6.decmp
 ```
+## NOTE
+1. The CSPP framework is designed for seamless integration with various architectures. To execute your own probability prediction model using CSPP, simply register your model class in the `MODEL_REGISTRY` within `fade.py`. You can then invoke it using the `--model` argument.
+2. To ensure a fair comparison, the default batch size (`-b`) is set to **512**. However, as demonstrated in our paper, batch sizes of **4096** or **8192** yield superior overall compression ratios. For practical deployment, we recommend setting the batch size to **4096** or **8192**, depending on your hardware capacity.
 
 # Dataset
 | Dataset    | Type          | Description                                                                  | Link                                                           |
