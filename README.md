@@ -2,6 +2,16 @@
 <h1>Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
 </div>
 
+# Introduction
+FADE is a state-of-the-art (SOTA) general-purpose lossless data compressor based on deep learning. It addresses the critical trade-off between probability modeling precision and system efficiency inherent in existing neural compressors. By introducing a novel Dual-Stream Architecture, FADE effectively decouples data into micro-syntactic and macro-semantic features. Furthermore, it incorporates the Concurrent Stream-Parallel Pipeline to overcome the serial bottleneck of autoregressive decoding, achieving a breakthrough in throughput. 
+
+FADE has the following several features:
+* :chart_with_downwards_trend: **Superior Compression Ratio:** Outperforms traditional and advanced learned methods.
+* :rocket: **High Throughput:** Powered by CSPP, achieving full-pipeline parallelism for both compression and decompression.
+* :zap: **Resource Optimized:** Optimized for minimal inference latency and GPU memory usage compared.
+* :wrench: **Extensible:** The underlying CSPP pipeline supports easy integration with custom predictive models.
+
+
 # Usage
 ## Setup
 ```
