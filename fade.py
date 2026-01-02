@@ -271,7 +271,7 @@ def decompress_worker_sync(rank, num_workers, bs, vocab_size, ts, temp_file, sha
 
 
 def compress_chunk(args, temp_file, series, train_data, final):
-    bs, ts = args.batchsize, args.timesteps
+    bs, ts = args.batch_size, args.timesteps
     vocab_size = args.vocab_size
 
     num_workers = min(args.num_workers, mp.cpu_count(), bs)
@@ -385,7 +385,7 @@ def compress_chunk(args, temp_file, series, train_data, final):
     return model # 返回模型用于计算性能
 
 def decompress_chunk(args, temp_file, info, last):
-    bs, ts = args.batchsize, args.timesteps
+    bs, ts = args.batch_size, args.timesteps
     len_series = info['len_series']
     vocab_size = args.vocab_size
 
@@ -489,7 +489,7 @@ def _init_environment(args):
         args.prefix = filename.split('.')[0]
     if not args.tempdir:
         args.tempdir = "{}_{}_bs{}_ts{}_vd{}".format(
-                args.model, args.prefix, args.batchsize, args.timesteps, 
+                args.model, args.prefix, args.batch_size, args.timesteps, 
                 args.vocab_dim)
 
     if os.path.exists(args.tempdir):
@@ -507,15 +507,15 @@ def main_compress(args):
     total_num = len(train_data)
     model = None
     
-    if total_num % args.batchsize == 0:
+    if total_num % args.batch_size == 0:
         model = compress_chunk(args, temp_file, series, train_data, None)
     else:
-        ini_num = total_num // args.batchsize * args.batchsize
+        ini_num = total_num // args.batch_size * args.batch_size
         model = compress_chunk(args, temp_file, series[:ini_num + args.timesteps], train_data[:ini_num], series[ini_num:])
 
     f = open(args.output, 'wb')
     f.write(struct.pack('<Q', len(series)))
-    for i in range(args.batchsize):
+    for i in range(args.batch_size):
         f_in = open(temp_file + '.' + str(i), 'rb')
         byte_str = f_in.read()
         byte_str_len = len(byte_str)
@@ -523,7 +523,7 @@ def main_compress(args):
         f.write(byte_str)
         f_in.close()
 
-    if total_num % args.batchsize != 0:
+    if total_num % args.batch_size != 0:
         f_in = open(temp_file + '.last', 'rb')
         byte_str = f_in.read()
         byte_str_len = len(byte_str)
@@ -543,7 +543,7 @@ def main_compress(args):
     # 计算模型性能
     model_stats = {'flops': 'N/A', 'params': 'N/A', 'latency': 'N/A'}
     if model is not None:
-        model_stats = calculate_model_stats(model, (args.batchsize, args.timesteps), args.vocab_size, device='cuda')
+        model_stats = calculate_model_stats(model, (args.batch_size, args.timesteps), args.vocab_size, device='cuda')
     
     data_name = os.path.basename(args.input)
     
@@ -560,7 +560,7 @@ def main_decompress(args):
     len_bytes = f.read(8)
     len_series = struct.unpack('<Q', len_bytes)[0]
     info_dict = {'len_series': len_series}
-    for i in range(args.batchsize):
+    for i in range(args.batch_size):
         f_out = open(temp_file + '.' + str(i), 'wb')
         byte_str_len = var_int_decode(f)
         byte_str = f.read(byte_str_len)
@@ -575,10 +575,10 @@ def main_decompress(args):
     f.close()
 
     model = None
-    if (info_dict['len_series'] - args.timesteps) % args.batchsize == 0:
+    if (info_dict['len_series'] - args.timesteps) % args.batch_size == 0:
         model = decompress_chunk(args, temp_file, info_dict, 0)
     else:
-        last_length = (info_dict['len_series'] - args.timesteps) % args.batchsize + args.timesteps
+        last_length = (info_dict['len_series'] - args.timesteps) % args.batch_size + args.timesteps
         model = decompress_chunk(args, temp_file, info_dict, last_length)
     shutil.rmtree(args.tempdir)
     t2 = time.time()
@@ -590,7 +590,7 @@ def main_decompress(args):
     
     model_stats = {'flops': 'N/A', 'params': 'N/A', 'latency': 'N/A'}
     if model is not None:
-        model_stats = calculate_model_stats(model, (args.batchsize, args.timesteps), args.vocab_size, device='cuda')
+        model_stats = calculate_model_stats(model, (args.batch_size, args.timesteps), args.vocab_size, device='cuda')
     
     data_name = os.path.basename(args.input)
     
@@ -599,7 +599,7 @@ def main_decompress(args):
 def add_shared_args(parser):
     parser.add_argument('input', type=str, help='Input file.')
     parser.add_argument('output', type=str, help='Output file.')
-    parser.add_argument('--batchsize', '-b', type=int, default=512, help='Sample size in one batch')
+    parser.add_argument('--batch_size', '-b', type=int, default=512, help='Sample size in one batch')
     parser.add_argument('--timesteps', '-t', type=int, default=16, help='The number of history symbols')
     parser.add_argument('--vocab_dim', '-d', type=int, default=32, help='The dimension of vocab.')
     parser.add_argument('--vocab_size', type=int, default=256, help='The size of vocab.')
