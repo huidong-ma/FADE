@@ -19,7 +19,7 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
 MODEL_REGISTRY = {
-    'fade': 'fade.FADE',
+    'fade': 'fade_model.FADE',
 }
 
 def get_model(model_name, **kwargs):
