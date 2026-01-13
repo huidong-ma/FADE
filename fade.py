@@ -24,7 +24,7 @@ MODEL_REGISTRY = {
 
 def get_model(model_name, **kwargs):
     if model_name not in MODEL_REGISTRY:
-        raise ValueError(f'Model \'{model_name}\' not found. Available models: {list(MODEL_REGISTRY.keys())}')
+        raise ValueError(f"Model '{model_name}' not found. Available models: {list(MODEL_REGISTRY.keys())}")
     
     module_path, class_name = MODEL_REGISTRY[model_name].rsplit('.', 1)
     try:
