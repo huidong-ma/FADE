@@ -24,7 +24,7 @@ MODEL_REGISTRY = {
 
 def get_model(model_name, **kwargs):
     if model_name not in MODEL_REGISTRY:
-        raise ValueError(f"Model '{model_name}' not found. Available models: {list(MODEL_REGISTRY.keys())}")
+        raise ValueError(f'Model \'{model_name}\' not found. Available models: {list(MODEL_REGISTRY.keys())}')
     
     module_path, class_name = MODEL_REGISTRY[model_name].rsplit('.', 1)
     try:
@@ -32,7 +32,7 @@ def get_model(model_name, **kwargs):
         model_class = getattr(module, class_name)
         return model_class(**kwargs)
     except ImportError as e:
-        print(f"Error importing {model_name}: {e}")
+        print(f'Error importing {model_name}: {e}')
         sys.exit(1)
 
 def calculate_model_stats(model, input_shape, vocab_size, device='cuda'):
@@ -41,12 +41,12 @@ def calculate_model_stats(model, input_shape, vocab_size, device='cuda'):
     
     try:
         flops, params = profile(model, inputs=(dummy_input,), verbose=False)
-        flops_str = "{:.3f}".format(flops / 1e9)
-        params_str = "{:.3f}".format(params / 1e6)
+        flops_str = '{:.3f}'.format(flops / 1e9)
+        params_str = '{:.3f}'.format(params / 1e6)
     except Exception as e:
-        print(f"Warning: Failed to calculate FLOPs/Params: {e}")
-        flops_str = "N/A"
-        params_str = "N/A"
+        print(f'Warning: Failed to calculate FLOPs/Params: {e}')
+        flops_str = 'N/A'
+        params_str = 'N/A'
     
     # 计算延迟warm up + 多次测试取平均
     try:
@@ -64,10 +64,10 @@ def calculate_model_stats(model, input_shape, vocab_size, device='cuda'):
             end_time = time.time()
             
             avg_latency = (end_time - start_time) / num_runs * 1000
-            latency_str = "{:.2f}".format(avg_latency)
+            latency_str = '{:.2f}'.format(avg_latency)
     except Exception as e:
-        print(f"Warning: Failed to calculate latency: {e}")
-        latency_str = "N/A"
+        print(f'Warning: Failed to calculate latency: {e}')
+        latency_str = 'N/A'
     
     model.train()
     
@@ -82,37 +82,36 @@ def print_compression_results(data_name, original_size, compressed_size, compres
     throughput = original_size / compression_time if compression_time > 0 else 0  # bytes/s
     throughput_kb = throughput / 1024  # KB/s
     
-    print("\n" + "=" * 80)
-    print("COMPRESSION RESULTS")
-    print("-" * 80)
+    width = 77
     
-    print(f"{'Dataset':<12} {'Orig.(B)':<12} {'Cmp.(B)':<12} {'CR':<12} {'Time(s)':<12} {'TP(KB/s)':<12}")
-    print(f"{data_name:<12} {original_size:<12} {compressed_size:<12} {compression_ratio:<12.5f} {compression_time:<12.3f} {throughput_kb:<12.3f}")
+    # 使用 .center 自动居中填充
+    print(' COMPRESSION RESULTS '.center(width, '='))
+    
+    print(f'{"Dataset":^12} {"Orig.(B)":^12} {"Cmp.(B)":^12} {"CR":^12} {"Time(s)":^12} {"TP(KB/s)":^12}')
+    print(f'{data_name:^12} {original_size:^12} {compressed_size:^12} {compression_ratio:^12.5f} {compression_time:^12.3f} {throughput_kb:^12.3f}')
 
-    print("-" * 80)
-    print("MODEL PERFORMANCE")
-    print("-" * 80)
-    print(f"{'GFLOPs':<12} {'Params(M)':<12} {'Latency(ms)':<12} {'GPU Mem(MB)':<12}")
-    print(f"{model_stats['flops']:<12} {model_stats['params']:<12} {model_stats['latency']:<12} {gpu_memory / 1024:<12.3f}")
-    print("=" * 80)
+    print('-' * width)
+    print(f'{"GFLOPs":^12} {"Params(M)":^12} {"Latency(ms)":^12} {"GPU Mem(MB)":^12}')
+    print(f'{model_stats["flops"]:^12} {model_stats["params"]:^12} {model_stats["latency"]:^12} {gpu_memory / 1024:^12.3f}')
+    print('=' * width + '\n')
 
 def print_decompression_results(data_name, compressed_size, decompressed_size, decompression_time, model_stats, gpu_memory):
     throughput = decompressed_size / decompression_time if decompression_time > 0 else 0  # bytes/s
     throughput_kb = throughput / 1024  # KB/s
     
-    print("\n" + "=" * 80)
-    print("DECOMPRESSION RESULTS")
-    print("=" * 80)
+    width = 64
     
-    print(f"{'Dataset':<12} {'Cmp.(B)':<12} {'Dcmp.(B)':<12} {'Time(s)':<12} {'TP(KB/s)':<12}")
-    print(f"{data_name:<12} {compressed_size:<12} {decompressed_size:<12} {decompression_time:<12.3f} {throughput_kb:<12.3f}")
+    # 使用 .center 自动居中填充
+    print(' DECOMPRESSION RESULTS '.center(width, '='))
+    
+    print(f'{"Dataset":^12} {"Cmp.(B)":^12} {"Decmp.(B)":^12} {"Time(s)":^12} {"TP(KB/s)":^12}')
+    print(f'{data_name:^12} {compressed_size:^12} {decompressed_size:^12} {decompression_time:^12.3f} {throughput_kb:^12.3f}')
 
-    print("-" * 80)
-    print("MODEL PERFORMANCE")
-    print("-" * 80)
-    print(f"{'GFLOPs':<12} {'Params(M)':<12} {'Latency(ms)':<12} {'GPU Mem(MB)':<12}")
-    print(f"{model_stats['flops']:<12} {model_stats['params']:<12} {model_stats['latency']:<12} {gpu_memory / 1024:<12.3f}")
-    print("=" * 80)
+    print('-' * width)
+
+    print(f'{"GFLOPs":^12} {"Params(M)":^12} {"Latency(ms)":^12} {"GPU Mem(MB)":^12}')
+    print(f'{model_stats["flops"]:^12} {model_stats["params"]:^12} {model_stats["latency"]:^12} {gpu_memory / 1024:^12.3f}')
+    print('=' * width + '\n')
 
 
 # === aux functions ===
@@ -213,7 +212,7 @@ def compress_worker_double_buffer(rank, num_workers, bs, vocab_size, ts, temp_fi
             f[i].close()
 
     except Exception as e:
-        print(f"Compress worker {rank} failed: {e}")
+        print(f'Compress worker {rank} failed: {e}')
         import traceback
         traceback.print_exc()
 
@@ -264,7 +263,7 @@ def decompress_worker_sync(rank, num_workers, bs, vocab_size, ts, temp_file, sha
             f[i].close()
 
     except Exception as e:
-        print(f"Decompress worker {rank} failed: {e}")
+        print(f'Decompress worker {rank} failed: {e}')
         import traceback
         traceback.print_exc()
 
@@ -278,7 +277,7 @@ def compress_chunk(args, temp_file, series, train_data, final):
     while bs % num_workers != 0 and num_workers > 1:
         num_workers -= 1
     
-    print(f"Compression using {num_workers} worker processes...")
+    print(f'Compression using {num_workers} worker processes...')
 
     shared_cumul_A = mp.Array(ctypes.c_uint64, bs * (vocab_size + 1))
     shared_cumul_B = mp.Array(ctypes.c_uint64, bs * (vocab_size + 1))
@@ -355,7 +354,7 @@ def compress_chunk(args, temp_file, series, train_data, final):
             events_gpu_ready[buf_idx].set()
             ind += 1
             if train_index >= (total_iters * 0.1 * flag):
-                print('{:^3.0f}%: {}'.format(flag * 10, loss.item() / np.log(2)))
+                print(f'[Progress:{flag * 10:>3.0f}%] Current Bit-Rate: {loss.item() / np.log(2):.10f} bps')
                 flag += 1
 
     finally:
@@ -380,7 +379,7 @@ def compress_chunk(args, temp_file, series, train_data, final):
         bitout.close()
         f.close()
 
-    print('{:^3.0f}%: {}'.format(100, 'Compression finished.'))
+    print(f'[Progress:{100}%] Compression finished.')
     
     return model # 返回模型用于计算性能
 
@@ -396,7 +395,7 @@ def decompress_chunk(args, temp_file, info, last):
     while bs % num_workers != 0 and num_workers > 1:
         num_workers -= 1
 
-    print(f"Decompression using {num_workers} worker processes...")
+    print(f'Decompression using {num_workers} worker processes...')
 
     # 单缓冲，因为解压必须同步
     shared_cumul = mp.Array(ctypes.c_uint64, bs * (vocab_size + 1))
@@ -450,7 +449,7 @@ def decompress_chunk(args, temp_file, info, last):
             optimizer.zero_grad()
 
             if (train_index + 1) >= (total_iters * 0.1 * flag):
-                print('{:^3.0f}%: {}'.format(10 * flag, train_loss.item() / np.log(2)))
+                print(f'[Progress:{flag * 10:>3.0f}%] Current Bit-Rate: {train_loss.item() / np.log(2):.10f} bps')
                 flag += 1
 
     finally:
@@ -460,7 +459,7 @@ def decompress_chunk(args, temp_file, info, last):
             if p.is_alive():
                 p.terminate()
 
-    print('{:^3.0f}%: {}'.format(100, 'Decompression finished.'))
+    print(f'[Progress:{100}%] Decompression finished.')
 
     with open(args.output, 'wb') as fout:
         fout.write(bytearray(series_np.reshape(-1).tolist()))
@@ -488,7 +487,7 @@ def _init_environment(args):
         filename = os.path.basename(args.input)
         args.prefix = filename.split('.')[0]
     if not args.tempdir:
-        args.tempdir = "{}_{}_bs{}_ts{}_vd{}".format(
+        args.tempdir = '{}_{}_bs{}_ts{}_vd{}'.format(
                 args.model, args.prefix, args.batch_size, args.timesteps, 
                 args.vocab_dim)
 
@@ -613,7 +612,7 @@ def add_shared_args(parser):
     parser.add_argument('--num_workers', '-w', type=int, default=8, help='Number of worker processes for parallel encoding/decoding')
 
 def main():
-    parser = argparse.ArgumentParser(description="Compression and Decomporession Process of FADE.")
+    parser = argparse.ArgumentParser(description='Compression and Decomporession Process of FADE.')
     subparsers = parser.add_subparsers(dest='command', required=True, help='Sub-commands')
 
     parser_c = subparsers.add_parser('c', help='Compress a file')
@@ -631,7 +630,7 @@ def main():
         torch.cuda.manual_seed(args.seed)
         torch.cuda.manual_seed_all(args.seed)
 
-    print("Running %s" % " ".join(sys.argv))
+    print('Running %s' % ' '.join(sys.argv))
 
     starttime = time.time()
     if args.command == 'c':
