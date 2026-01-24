@@ -84,7 +84,6 @@ def print_compression_results(data_name, original_size, compressed_size, compres
     
     width = 77
     
-    # 使用 .center 自动居中填充
     print(' COMPRESSION RESULTS '.center(width, '='))
     
     print(f'{"Dataset":^12} {"Orig.(B)":^12} {"Cmp.(B)":^12} {"CR":^12} {"Time(s)":^12} {"TP(KB/s)":^12}')
@@ -101,7 +100,6 @@ def print_decompression_results(data_name, compressed_size, decompressed_size, d
     
     width = 64
     
-    # 使用 .center 自动居中填充
     print(' DECOMPRESSION RESULTS '.center(width, '='))
     
     print(f'{"Dataset":^12} {"Cmp.(B)":^12} {"Decmp.(B)":^12} {"Time(s)":^12} {"TP(KB/s)":^12}')
