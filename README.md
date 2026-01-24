@@ -2,6 +2,7 @@
 <h1>Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
 </div>
 
+
 # Introduction
 FADE is a state-of-the-art general-purpose lossless data compressor based on deep learning. It addresses the critical trade-off between probability modeling precision and system efficiency inherent in existing neural compressors. By introducing a novel Dual-Stream Architecture, FADE effectively decouples data into micro-syntactic and macro-semantic features. Furthermore, it incorporates the Concurrent Stream-Parallel Pipeline to overcome the serial bottleneck of autoregressive decoding, achieving a breakthrough in throughput. 
 
@@ -11,10 +12,13 @@ FADE has the following several features:
 * :zap: **Resource Optimized:** Optimized for minimal inference latency and GPU memory usage compared.
 * :wrench: **Extensible:** The underlying CSPP pipeline supports easy integration with custom predictive models.
 
+---
 
 # Usage
 ## Setup
 ```
+conda create -n FADE python=3.12
+source activate FADE
 cd ./FADE
 pip install -r requirements.txt
 ```
@@ -35,6 +39,8 @@ python fade.py d enwik6.cmp enwik6.decmp
 1. The CSPP framework is designed for seamless integration with various architectures. To execute your own probability prediction model using CSPP, simply register your model class in the `MODEL_REGISTRY` within `fade.py`. You can then invoke it using the `--model/-m` argument.
 2. To ensure a fair comparison, the default batch size (`--batch_size/-b`) is set to **512**. However, as demonstrated in our paper, batch sizes of **4096** or **8192** yield superior overall compression ratios. For practical deployment, we recommend setting the batch size to **4096** or **8192**, depending on your hardware capacity.
 
+---
+
 # Dataset
 | Dataset    | Type          | Description                                                                  | Link                                                           |
 |:----------:|:-------------:|:----------------------------------------------------------------------------:|:--------------------------------------------------------------:|
@@ -47,3 +53,5 @@ python fade.py d enwik6.cmp enwik6.decmp
 | Silesia    | heterogeneous | A heterogeneous corpus of 12 files covering various file formats.            | [Page](https://sun.aei.polsl.pl/~sdeor/index.php?page=silesia) |
 
 The processed data used in the paper can be directly downloaded from [fade_datasets.tar.gz](https://drive.google.com/file/d/10UCnfr-WG-gevjl_n7nC0yP4A3sVaMPB/view?usp=drive_link) and extracted by executing `tar -xzf fade_datasets.tar.gz`.
+
+---
