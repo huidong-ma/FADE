@@ -3,26 +3,26 @@
 </div>
 
 
-# Introduction
+# 📄Introduction
 FADE is a state-of-the-art general-purpose lossless data compressor based on deep learning. It addresses the critical trade-off between probability modeling precision and system efficiency inherent in existing neural compressors. By introducing a novel Dual-Stream Architecture, FADE effectively decouples data into micro-syntactic and macro-semantic features. Furthermore, it incorporates the Concurrent Stream-Parallel Pipeline to overcome the serial bottleneck of autoregressive decoding, achieving a breakthrough in throughput. 
 
 FADE has the following several features:
-* :chart_with_downwards_trend: **Superior Compression Ratio:** Outperforms traditional and advanced learned methods.
-* :rocket: **High Throughput:** Powered by CSPP, achieving full-pipeline parallelism for both compression and decompression.
-* :zap: **Resource Optimized:** Optimized for minimal inference latency and GPU memory usage compared.
-* :wrench: **Extensible:** The underlying CSPP pipeline supports easy integration with custom predictive models.
+* :chart_with_downwards_trend:**Superior Compression Ratio:** Outperforms traditional and advanced learned methods.
+* :rocket:**High Throughput:** Powered by CSPP, achieving full-pipeline parallelism for both compression and decompression.
+* :zap:**Resource Optimized:** Optimized for minimal inference latency and GPU memory usage compared.
+* :wrench:**Extensible:** The underlying CSPP pipeline supports easy integration with custom predictive models.
 
 ---
 
-# Usage
-## Setup
+# 💡Usage
+### Setup
 ```
 conda create -n FADE python=3.12
 source activate FADE
 cd ./FADE
 pip install -r requirements.txt
 ```
-## Running
+### Running
 ```
 # Compression
 python fade.py c <file> <file>.cmp
@@ -35,13 +35,13 @@ python fade.py d <file>.cmp <file>.decmp
 python fade.py c enwik6 enwik6.cmp
 python fade.py d enwik6.cmp enwik6.decmp
 ```
-## NOTE
+### NOTE
 1. The CSPP framework is designed for seamless integration with various architectures. To execute your own probability prediction model using CSPP, simply register your model class in the `MODEL_REGISTRY` within `fade.py`. You can then invoke it using the `--model/-m` argument.
 2. To ensure a fair comparison, the default batch size (`--batch_size/-b`) is set to **512**. However, as demonstrated in our paper, batch sizes of **4096** or **8192** yield superior overall compression ratios. For practical deployment, we recommend setting the batch size to **4096** or **8192**, depending on your hardware capacity.
 
 ---
 
-# Dataset
+# 📦Dataset
 | Dataset    | Type          | Description                                                                  | Link                                                           |
 |:----------:|:-------------:|:----------------------------------------------------------------------------:|:--------------------------------------------------------------:|
 | Enwik9     | text          | First $10^9$ bytes of the English Wikipedia dump on 2006.                    | [Page](https://mattmahoney.net/dc/textdata.html)               |
