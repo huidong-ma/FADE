@@ -25,10 +25,10 @@ pip install -r requirements.txt
 ### Running
 ```
 # Compression
-python fade.py c <file> <file>.cmp
+python fade.py c <raw_file> <compressed_file>
 
 # Decompression
-python fade.py d <file>.cmp <file>.decmp
+python fade.py d <compressed_file> <decompressed_file>
 ```
 **For example**:
 ```
