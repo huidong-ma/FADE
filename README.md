@@ -12,6 +12,13 @@ FADE has the following several features:
 * :zap:**Resource Optimized:** Optimized for minimal inference latency and GPU memory usage compared.
 * :wrench:**Extensible:** The underlying CSPP pipeline supports easy integration with custom predictive models.
 
+<div align="center">
+  <img src="https://github.com/huidong-ma/FADE/blob/main/assets/cr_vs_tp.png" width="600" alt="An example.">
+  <br>
+  <b>Trade-off between compression ratio and throughput. Top-right is better.</b>
+</div>
+
+
 ---
 
 # 💡Usage
