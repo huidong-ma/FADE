@@ -13,7 +13,9 @@ FADE has the following several features:
 * :wrench:**Extensible:** The underlying CSPP pipeline supports easy integration with custom predictive models.
 
 <div align="center">
-  <img src="https://github.com/huidong-ma/FADE/blob/main/assets/cr_vs_tp.png" width="600" alt="An example.">
+  <a href="https://github.com/huidong-ma/FADE/blob/main/assets/cr_vs_tp.png">
+    <img src="https://github.com/huidong-ma/FADE/blob/main/assets/cr_vs_tp.png" width="600" alt="Performance">
+  </a>
   <br>
   <b>Trade-off between compression ratio and throughput. Top-right is better.</b>
 </div>
