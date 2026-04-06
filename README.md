@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
+<h1>[ACL'26 Main] Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
 <h3>Huidong Ma, Xinyan Shi, Hui Sun, Xiaofei Yue, Xiaoguang Liu, Gang Wang, Wentong Cai</h3>
 </div>
 
@@ -64,3 +64,12 @@ python fade.py d enwik6.cmp enwik6.decmp
 The processed data used in the paper can be directly downloaded from [fade_datasets.tar.gz](https://drive.google.com/file/d/10UCnfr-WG-gevjl_n7nC0yP4A3sVaMPB/view?usp=drive_link) and extracted by executing `tar -xzf fade_datasets.tar.gz`.
 
 ---
+
+# Acknowledgment
+The code is based on [PAC](https://github.com/mynotwo/Faster-and-Stronger-Lossless-Compression-with-Optimized-Autoregressive-Framework), [EDPC](https://github.com/Magie0/EDPC), and [Arithmetic Coding](https://github.com/nayuki/Reference-arithmetic-coding). Thanks for these great works.
+
+---
+
+# Contact
+Email: mahd@nbjl.nankai.edu.cn  
+Nankai-Baidu Joint Laboratory (NBJL)
