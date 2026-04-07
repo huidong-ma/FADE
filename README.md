@@ -31,8 +31,9 @@ FADE has the following several features:
 # 💡Usage
 ### Setup
 ```
-conda create -n FADE python=3.12
-source activate FADE
+conda create -n fade_env python=3.12
+conda activate fade_env
+git clone https://github.com/huidong-ma/FADE.git
 cd ./FADE
 pip install -r requirements.txt
 ```
