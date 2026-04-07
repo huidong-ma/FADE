@@ -4,7 +4,7 @@
 </div>
 
 
-# 📄Introduction
+# 📄 Introduction
 FADE is a state-of-the-art general-purpose lossless data compressor based on deep learning. It addresses the critical trade-off between probability modeling precision and system efficiency inherent in existing neural compressors. By introducing a novel Dual-Stream Architecture, FADE effectively decouples data into micro-syntactic and macro-semantic features. Furthermore, it incorporates the Concurrent Stream-Parallel Pipeline to overcome the serial bottleneck of autoregressive decoding, achieving a breakthrough in throughput. 
 
 FADE has the following several features:
@@ -28,7 +28,7 @@ FADE has the following several features:
 
 ---
 
-# 💡Usage
+# 💡 Usage
 ### Setup
 ```
 conda create -n fade_env python=3.12
@@ -56,7 +56,7 @@ python fade.py d enwik6.cmp enwik6.decmp
 
 ---
 
-# 📦Dataset
+# 📦 Dataset
 | Dataset    | Type          | Description                                                                  | Link                                                           |
 |:----------:|:-------------:|:----------------------------------------------------------------------------:|:--------------------------------------------------------------:|
 | Enwik9     | text          | First $10^9$ bytes of the English Wikipedia dump on 2006.                    | [Page](https://mattmahoney.net/dc/textdata.html)               |
@@ -71,11 +71,11 @@ The processed data used in the paper can be directly downloaded from [fade_datas
 
 ---
 
-# Acknowledgment
+# 📖 Acknowledgment
 The code is based on [PAC](https://github.com/mynotwo/Faster-and-Stronger-Lossless-Compression-with-Optimized-Autoregressive-Framework), [EDPC](https://github.com/Magie0/EDPC), and [Arithmetic Coding](https://github.com/nayuki/Reference-arithmetic-coding). Thanks for these great works.
 
 ---
 
-# Contact
+# ✉️ Contact
 Email: mahd@nbjl.nankai.edu.cn  
 Nankai-Baidu Joint Laboratory (NBJL)
