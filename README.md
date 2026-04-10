@@ -1,5 +1,5 @@
 <div align="center">
-<h1>[ACL'26] Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
+<h1>[ACL'26 Main] Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
 <h3>Huidong Ma, Xinyan Shi, Hui Sun, Xiaofei Yue, Xiaoguang Liu, Gang Wang, Wentong Cai</h3>
 </div>
 
