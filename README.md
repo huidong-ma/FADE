@@ -23,6 +23,7 @@ FADE has the following several features:
 
 ---
 # 🔥 News
+- *2026.04*: We have uploaded the preprint paper to [arXiv](https://arxiv.org/abs/2604.07239).
 - *2026.04*: Our work has been accepted by ACL 2026 (Main Conference).
 - *2026.01*: We have released the source code and datasets.
 
