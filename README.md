@@ -75,14 +75,11 @@ The processed data used in the paper can be directly downloaded from [fade_datas
 ## 🔗 Citation
 If you use FADE in your research, please cite our paper and star this repository to support us!
 ```
-@misc{ma2026efficientlearneddatacompression,
-      title={Efficient Learned Data Compression via Dual-Stream Feature Decoupling}, 
-      author={Huidong Ma and Xinyan Shi and Hui Sun and Xiaofei Yue and Xiaoguang Liu and Gang Wang and Wentong Cai},
-      year={2026},
-      eprint={2604.07239},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2604.07239}, 
+@article{ma2026efficient,
+  title={Efficient Learned Data Compression via Dual-Stream Feature Decoupling},
+  author={Ma, Huidong and Shi, Xinyan and Sun, Hui and Yue, Xiaofei and Liu, Xiaoguang and Wang, Gang and Cai, Wentong},
+  journal={arXiv preprint arXiv:2604.07239},
+  year={2026}
 }
 ```
 ---
