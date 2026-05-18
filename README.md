@@ -1,5 +1,5 @@
 <div align="center">
-<h1>[ACL'26 Main] Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
+<h1>[ACL'26 Oral] Efficient Learned Data Compression via Dual-Stream Feature Decoupling</h1>
 <h3>Huidong Ma, Xinyan Shi, Hui Sun, Xiaofei Yue, Xiaoguang Liu, Gang Wang, Wentong Cai</h3>
 </div>
 
@@ -24,7 +24,7 @@ FADE has the following several features:
 ---
 ## 🔥 News
 - *2026.04*: We have uploaded the preprint paper to [arXiv](https://arxiv.org/abs/2604.07239).
-- *2026.04*: Our work has been accepted by ACL 2026 (Main Conference).
+- *2026.04*: Our work has been accepted by ACL 2026 for an **Oral Presentation**.
 - *2026.01*: We have released the source code and datasets.
 
 ---
