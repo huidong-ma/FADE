@@ -68,7 +68,7 @@ python fade.py d enwik6.cmp enwik6.decmp
 | DNACorpus  | genome        | A corpus of DNA sequences from 15 different species.                         | [Page](https://sweet.ua.pt/pratas/datasets/DNACorpus.zip)      |
 | Silesia    | heterogeneous | A heterogeneous corpus of 12 files covering various file formats.            | [Page](https://sun.aei.polsl.pl/~sdeor/index.php?page=silesia) |
 
-The processed data used in the paper can be directly downloaded from [fade_datasets.tar.gz](https://drive.google.com/file/d/10UCnfr-WG-gevjl_n7nC0yP4A3sVaMPB/view?usp=drive_link) and extracted by executing `tar -xzf fade_datasets.tar.gz`.
+The processed data used in the paper can be directly downloaded from [fade_datasets.tar.gz](https://huggingface.co/datasets/huidong-ma/ACL2026-FADE-Datasets) and extracted by executing `tar -xzf fade_datasets.tar.gz`.
 
 ---
 
